@@ -1,4 +1,7 @@
+*.pyc
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+data/**/*.pkl
+utils/cookie_val.py
