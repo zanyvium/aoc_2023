@@ -44,3 +44,5 @@ def load_input(year, day, session_cookie = cookie_val, save_path = "./data/"):
 
     return puzzle_input
     
+def line_transform_input(puzzle_input) -> list:
+    return list(puzzle_input.split("\n"))
