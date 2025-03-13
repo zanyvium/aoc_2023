@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import requests
 import pickle
 from utils.cookie_val import cookie_val
@@ -46,3 +47,7 @@ def load_input(year, day, session_cookie = cookie_val, save_path = "./data/"):
     
 def split_puzzle_input(puzzle_input) -> list:
     return list(puzzle_input.split("\n"))
+
+def matrix_puzzle_input(puzzle_input) -> np.ndarray:
+    puzzle_input_split = split_puzzle_input(puzzle_input)
+    return np.array(list(map(lambda x: list(x), puzzle_input_split)))
