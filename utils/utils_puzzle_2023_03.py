@@ -2,14 +2,19 @@ import numpy as np
 
 is_digit = np.vectorize(str.isdigit)
 
-def get_surrounding_indices(np_where_indices: tuple, matrix_shape) -> tuple:
+# CHAT_GPT inspired
+def get_surrounding_indices(np_where_indices: tuple, matrix_shape, diagonals: bool = True) -> tuple:
     
     # Get indices
     row_indices, column_indices = np_where_indices
     
     # set offsets for the eight surrounding entries
-    row_offsets = np.array([-1, -1, -1, 0, 0, 1, 1, 1])
-    col_offsets = np.array([-1, 0, 1, -1, 1, -1, 0, 1])
+    if diagonals:
+        row_offsets = np.array([-1, -1, -1, 0, 0, 1, 1, 1])
+        col_offsets = np.array([-1,  0,  1,-1, 1,-1, 0, 1])
+    else:
+        row_offsets = np.array([-1, 0, 0, 1])
+        col_offsets = np.array([ 0,-1, 1, 0])
 
     # calculate the neighbour entries
     neighbour_rows = row_indices[:, None] + row_offsets
