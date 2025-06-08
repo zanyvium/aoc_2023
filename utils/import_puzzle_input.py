@@ -4,13 +4,13 @@ import requests
 import pickle
 from utils.cookie_val import cookie_val
 
-def _generate_input_pickle_name(year, day):
+def _generate_input_pickle_name(year: int, day: int):
     if day < 10:
         return f"puzzle_input_{year}_0{day}.pkl"
     else: 
         return f"puzzle_input_{year}_{day}.pkl"
 
-def _fetch_input(year, day, session_cookie = cookie_val):
+def _fetch_input(year, day, session_cookie: str = cookie_val):
     url = f"https://adventofcode.com/{year}/day/{day}/input"
     headers = {
         "Cookie": f"session={session_cookie}",
@@ -28,7 +28,7 @@ def _save_input(*, response, pickle_name, save_path= "./data/"):
     with open(save_path + pickle_name, "wb") as file:
         pickle.dump(response, file)
 
-def load_input(year, day, session_cookie = cookie_val, save_path = "./data/"):
+def load_input(year: int, day: int, session_cookie: str = cookie_val, save_path: str = "./data/") -> str:
     assumed_pickle_name = _generate_input_pickle_name(year = year, day = day)
     path_and_name = save_path + assumed_pickle_name
 
@@ -45,9 +45,9 @@ def load_input(year, day, session_cookie = cookie_val, save_path = "./data/"):
 
     return puzzle_input
     
-def split_puzzle_input(puzzle_input) -> list:
+def split_puzzle_input(puzzle_input: str) -> list[str]:
     return list(puzzle_input.split("\n"))
 
-def matrix_puzzle_input(puzzle_input) -> np.ndarray:
+def matrix_puzzle_input(puzzle_input: str) -> np.ndarray:
     puzzle_input_split = split_puzzle_input(puzzle_input)
     return np.array(list(map(lambda x: list(x), puzzle_input_split)))
